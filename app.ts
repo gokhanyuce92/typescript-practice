@@ -14,6 +14,10 @@ import {
 import { Stack } from "./models/Stack";
 import { Pair } from "./interfaces/Pair";
 import { List } from "./models/List";
+import { IPerson } from "./interfaces/IPerson";
+import { Printer } from "./interfaces/extending-multiple/Printer";
+import { Dog1 } from "./interfaces/overriding-methods/Dog1";
+import { Car } from "./models/Car";
 
 // let message: string = "Hello, TypeScript!";
 
@@ -539,3 +543,41 @@ let list = new List<number>();
 for (let i = 0; i < 10; i++) {
   list.add(i);
 }
+
+var customer: IPerson = {
+  firstName: "Tom",
+  lastName: "Hanks",
+  sayHi: () => "Hi there",
+};
+console.log("Customer Object ");
+console.log(customer.firstName);
+console.log(customer.lastName);
+console.log(customer.sayHi());
+
+var employee11: IPerson = {
+  firstName: "Jim",
+  lastName: "Blakes",
+  sayHi: () => "Hello!!!",
+};
+console.log("Employee  Object ");
+console.log(employee11.firstName);
+console.log(employee11.lastName);
+
+console.log("Printer Object ");
+const printer = new Printer();
+printer.copy();
+printer.print();
+printer.scan();
+
+console.log("Dog1 Object ");
+const dog1: Dog1 = {
+  name: "Buddy",
+  makeSound: () => {
+    console.log("Woof Woof");
+  },
+};
+dog1.makeSound();
+
+console.log("Car Object ");
+const car = new Car("V8 Engine");
+car.disp();
