@@ -17,7 +17,11 @@ import { List } from "./models/List";
 import { IPerson } from "./interfaces/IPerson";
 import { Printer } from "./interfaces/extending-multiple/Printer";
 import { Dog1 } from "./interfaces/overriding-methods/Dog1";
-import { Car } from "./models/Car";
+import { AgriLoan } from "./models/AgriLoan";
+import { Point } from "./models/Point";
+import IPoint from "./interfaces/IPoint";
+import { BankAccount } from "./models/BankAccount";
+import { Employee1 } from "./models/Employee1";
 
 // let message: string = "Hello, TypeScript!";
 
@@ -563,12 +567,16 @@ console.log("Employee  Object ");
 console.log(employee11.firstName);
 console.log(employee11.lastName);
 
+console.log("TypeScript Interfaces");
 console.log("Printer Object ");
 const printer = new Printer();
 printer.copy();
 printer.print();
 printer.scan();
 
+console.log("TypeScript Classes and Objects");
+
+console.log("TypeScript - Classes");
 console.log("Dog1 Object ");
 const dog1: Dog1 = {
   name: "Buddy",
@@ -578,6 +586,34 @@ const dog1: Dog1 = {
 };
 dog1.makeSound();
 
-console.log("Car Object ");
-const car = new Car("V8 Engine");
-car.disp();
+const agriLoan = new AgriLoan(5, 2);
+console.log(`Interest: ${agriLoan.interest}, Rebate: ${agriLoan.rebate}`);
+
+console.log("TypeScript - Objects");
+const point = new Point();
+let resultPoint: IPoint = point.addPoints({ x: 1, y: 2 }, { x: 3, y: 4 });
+
+console.log(`Result Point: x=${resultPoint.x}, y=${resultPoint.y}`);
+
+console.log("TypeScript - Access Modifiers");
+const bankAccount = new BankAccount(1000);
+console.log(`Interest: ${bankAccount.calculateInterest()}`);
+
+console.log("TypeScript - Readonly Properties");
+interface Car {
+  model: string;
+  year: number;
+  readonly fuel: string;
+}
+let car1: Car = {
+  model: "Toyota",
+  year: 2022,
+  fuel: "Gasoline",
+};
+console.log(`Car Model: ${car1.model}, Year: ${car1.year}, Fuel: ${car1.fuel}`);
+
+console.log("TypeScript - Inheritance");
+let emp = new Employee1("John Doe", 12345);
+emp.show();
+
+console.log("TypeScript - Static Methods and Properties");
