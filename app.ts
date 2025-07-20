@@ -22,6 +22,14 @@ import { Point } from "./models/Point";
 import IPoint from "./interfaces/IPoint";
 import { BankAccount } from "./models/BankAccount";
 import { Employee1 } from "./models/Employee1";
+import { Person as PersonWithGetterSetter } from "./models/getter-setter/Person";
+import { Temperature } from "./models/getter-setter/Temperature";
+import { Duck } from "./interfaces/Duck";
+import { MallardDuck } from "./models/MallardDuck";
+import { RubberDuck } from "./models/RubberDuck";
+import { Driveable } from "./interfaces/Driveable";
+import { Bus } from "./models/Bus";
+import { Truck } from "./models/Truck";
 
 // let message: string = "Hello, TypeScript!";
 
@@ -617,3 +625,30 @@ let emp = new Employee1("John Doe", 12345);
 emp.show();
 
 console.log("TypeScript - Static Methods and Properties");
+
+console.log("TypeScript - Accessors");
+const person2 = new PersonWithGetterSetter("Jane Doe");
+console.log(`Person Name: ${person2.getName}`);
+
+const temperature = new Temperature(25);
+console.log("The Fahrenheit value is: " + temperature.fahrenheit);
+temperature.celsiusValue = 30;
+console.log("The Fahrenheit value is: " + temperature.fahrenheit);
+
+console.log("TypeScript - Duck Typing");
+function makeDuckQuack(duck: Duck) {
+  duck.quack();
+}
+// let duck: Duck;
+// duck = new MallardDuck();
+// duck.quack();
+// duck = new RubberDuck();
+// duck.quack();
+makeDuckQuack(new MallardDuck());
+makeDuckQuack(new RubberDuck());
+
+function goDrive(driveable: Driveable) {
+  driveable.drive();
+}
+goDrive(new Bus());
+goDrive(new Truck());
