@@ -30,6 +30,7 @@ import { RubberDuck } from "./models/RubberDuck";
 import { Driveable } from "./interfaces/Driveable";
 import { Bus } from "./models/Bus";
 import { Truck } from "./models/Truck";
+import { Child11 } from "./models/Child11";
 
 // let message: string = "Hello, TypeScript!";
 
@@ -652,3 +653,140 @@ function goDrive(driveable: Driveable) {
 }
 goDrive(new Bus());
 goDrive(new Truck());
+
+const child11 = new Child11(13, "Child Name");
+console.log(child11.getId());
+console.log(child11.getName());
+
+console.log("TypeScript - Type Assertions");
+// Using as Operator for Type Assertion
+let variable_any: any = 123;
+let variable_number: number = variable_any as number;
+
+// Using <> Operator for Type Assertion
+let variable_any1: any = 123;
+let variable_number1: number = <number>variable_any1;
+
+// Using Object for Type Assertion
+interface info {
+  name: string;
+  value: string;
+}
+let my_obj = <info>{
+  name: "example",
+  value: "123",
+};
+
+console.log("TypeScript Type Manipulation");
+// Union Types
+type StringOrNumber = string | number;
+
+function processValue(value: StringOrNumber) {
+  if (typeof value === "string") {
+    console.log(`String: ${value}`);
+  } else {
+    console.log(`Number: ${value}`);
+  }
+}
+
+processValue("hello");
+processValue(123);
+
+// Intersection Types
+interface Business {
+  name: string;
+  turnover: number;
+}
+interface ContactDetails {
+  email: string;
+  phone: string;
+}
+
+// Intersection of two types
+type BusinessContact = Business & ContactDetails;
+
+let contact: BusinessContact = {
+  name: "EnviroFront",
+  turnover: 5000000,
+  email: "abc@gmail.com",
+  phone: "1234567890",
+};
+
+console.log(contact);
+
+// Utility types
+// TypeScript, belirli türleri dönüştürmeyi ve yeni türler oluşturmayı kolaylaştıran
+// birden fazla yardımcı tür içerir. Şimdi bazı yardımcı tipleri örneklerle inceleyelim.
+
+// 1. Partial Utility Type
+// Aşağıdaki kodda, ‘Todo’ arayüzünü tanımladık.
+// Daha sonra, Todo arayüzünü kullanarak yeni bir tür oluşturmak için
+// Partial yardımcı türünü kullandık ve tüm özelliklerini isteğe bağlı hale getirdik.
+
+interface Todo {
+  title: string;
+  description: string;
+}
+type OptionalTodo = Partial<Todo>;
+
+let todo: OptionalTodo = { title: "Buy milk" }; // 'description' is optional
+console.log(todo);
+
+// 2. Pick Utility Type
+// Pick yardımcı program türü, mevcut türlerden bir özellik alt kümesi seçilmesine
+// olanak tanır. Bunu aşağıdaki örnek üzerinden anlayalım
+
+type TodoPick = Pick<Todo, "title">;
+
+let myTodo: TodoPick = { title: "Write a code" }; // 'description' is not included
+console.log(myTodo.title);
+
+console.log("TypeScript - Keyof Type Operator");
+// TypeScript'te keyof tür operatörü, bir nesnenin anahtarlarını elde etmenizi ve
+// bunları çeşitli işlemler gerçekleştirmek için kullanmanızı sağlar.
+// Nesneler ve özellikleriyle çalışırken önemli bir rol oynar.
+
+type TodoKeys = keyof Todo;
+const keys: TodoKeys = "title";
+console.log(keys);
+
+// Type-Safe Property Access
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+
+const car11: Car = {
+  model: "Toyota",
+  year: 2022,
+  fuel: "Gasoline",
+};
+
+const carModel: string = getProperty(car11, "model");
+console.log(carModel);
+
+// TypeScript - Mapped Types
+console.log("TypeScript - Mapped Types");
+// Partial<T>: Mevcut türün tüm özelliklerini isteğe bağlı hale getirerek yeni bir tür oluşturur.
+// Required<T>: Mevcut türün tüm özelliklerini gerekli hale getirerek yeni bir tür oluşturur.
+// Readonly<T>: Yeni bir türde tüm özellikleri isteğe bağlı hale getirir. readonly dir.
+// Record<K, T>: T türünde K özellik kümesine sahip bir tür oluşturur. Aynı türden özellikleri eşlemek için kullanışlıdır.
+// Pick<T, K>: T'den bir K özellik kümesi seçerek yeni bir tür oluşturur
+// Omit<T, K>: T'den bir K özellik kümesini çıkararak yeni bir tür oluşturur.
+// Exclude<T, U>: U'ya atanabilen tüm özellikleri T'den çıkararak yeni bir tür oluşturur.
+// Extract<T, U>: T'den U'ya atanabilen tüm özellikleri çıkararak yeni bir tür oluşturur.
+// NonNullable<T>: T'den null ve undefined öğelerini çıkararak bir tür oluşturur.
+
+// TypeScript - Template Literal Types
+console.log("TypeScript - Template Literal Types");
+
+type Method = "get" | "post" | "delete";
+type Entity = "user" | "post";
+
+type ApiRoute = `/${Entity}/${Method}`;
+
+function getRoute(entity: Entity, method: Method): ApiRoute {
+  return `/${entity}/${method}` as ApiRoute;
+}
+
+const userRoute = getRoute("user", "post");
+console.log(userRoute);
