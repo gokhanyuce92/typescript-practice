@@ -31,6 +31,9 @@ import { Driveable } from "./interfaces/Driveable";
 import { Bus } from "./models/Bus";
 import { Truck } from "./models/Truck";
 import { Child11 } from "./models/Child11";
+import { Box } from "./models/Box";
+import { Stack1 } from "./models/Stack1";
+import { MemorydataBase } from "./models/MemorydataBase";
 
 // let message: string = "Hello, TypeScript!";
 
@@ -790,3 +793,77 @@ function getRoute(entity: Entity, method: Method): ApiRoute {
 
 const userRoute = getRoute("user", "post");
 console.log(userRoute);
+
+// TypeScript - Generics
+console.log("TypeScript - Generics");
+
+function printVar<T>(val: T) {
+  console.log("data: ", val);
+}
+let arr = [1, 2, 3];
+let obj = { name: "John", age: 25 };
+
+printVar(arr);
+printVar(obj);
+printVar(true);
+
+// TypeScript - Generic Interfaces
+console.log("TypeScript - Generic Interfaces");
+
+interface IGeneric<T> {
+  value1: T;
+  value2: T;
+}
+let obj1: IGeneric<number> = {
+  value1: 10,
+  value2: 20,
+};
+console.log(`Value1: ${obj1.value1}, Value2: ${obj1.value2}`);
+
+interface IGeneric1<T, U> {
+  value1: T;
+  value2: U;
+}
+let obj2: IGeneric1<number, string> = {
+  value1: 10,
+  value2: "Hello",
+};
+console.log(`Value1: ${obj2.value1}, Value2: ${obj2.value2}`);
+
+interface IGeneric2<T, U> {
+  value1: T;
+  merge: (a: U, b: U) => U;
+}
+let obj3: IGeneric2<number, string> = {
+  value1: 10,
+  merge: (a, b) => a + b,
+};
+console.log(
+  `Value1: ${obj3.value1}, Merged Value: ${obj3.merge("Hello ", "World")}`
+);
+
+// TypeScript - Generic Classes
+let box1 = new Box<number>(10);
+console.log(box1.get());
+
+let box2 = new Box<string>("Hello");
+console.log(box2.get());
+
+const numberStack1 = new Stack1<number>();
+numberStack1.push(1);
+numberStack1.push(2);
+numberStack1.push(3);
+
+console.log(numberStack1.peek()); // Outputs: 3
+console.log(numberStack1.pop()); // Outputs: 3
+console.log(numberStack1.peek()); // Outputs: 2
+console.log(numberStack1.isEmpty()); // Outputs: false
+console.log(numberStack1.size());
+
+const repo = new MemorydataBase<string>();
+repo.save("Hello");
+repo.save("World");
+console.log(repo.getItems());
+console.log(repo.findById(1));
+
+// TypeScript - Namespaces
