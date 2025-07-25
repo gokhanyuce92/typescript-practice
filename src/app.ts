@@ -866,4 +866,13 @@ repo.save("World");
 console.log(repo.getItems());
 console.log(repo.findById(1));
 
-// TypeScript - Namespaces
+// TypeScript - Iterators and Generators
+console.log("TypeScript - Iterators and Generators");
+const fruits = ["apple", "banana", "mango", "orange", "strawberry"];
+const iterator = fruits.values();
+console.log(iterator.next().value); // apple
+console.log(iterator.next().value); // banana
+console.log(iterator.next().value); // mango
+console.log(iterator.next().value); // orange
+console.log(iterator.next().value); // strawberry
+console.log(iterator.next().value); // undefined
